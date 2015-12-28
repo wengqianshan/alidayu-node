@@ -47,7 +47,6 @@ App.prototype.sign = function(params) {
 //请求mtop服务
 App.prototype.request = function(params, callback) {
     var params = this.sign(params);
-    return;
     request({
         url: this.url,
         headers: {
@@ -57,7 +56,7 @@ App.prototype.request = function(params, callback) {
         qs: params,
         json: true
     }, function(err, res, body) {
-        callback && callback.call(body);
+        callback && callback.call(null, body);
     })
 }
 
