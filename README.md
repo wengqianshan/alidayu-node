@@ -2,7 +2,9 @@
 
 ## 安装
 
-> 待发布到npm
+````
+npm install --save alidayu-node
+````
 
 ## 使用方法
 ````
@@ -15,4 +17,10 @@ app.smsSend({
     rec_num: '13599999999',
     sms_template_code: 'SMS_640004'
 });
+````
+
+## 测试
+
+````
+npm test
 ````
