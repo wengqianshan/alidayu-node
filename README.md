@@ -6,7 +6,7 @@
 
 ## 使用方法
 ````
-var App = require('alidayu-noe');
+var App = require('alidayu-node');
 var app = new App('App Key', 'App Secret');
 
 app.smsSend({
