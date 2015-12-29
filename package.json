@@ -4,7 +4,7 @@
   "description": "阿里大鱼nodejs版sdk",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha ./test"
   },
   "author": "",
   "license": "ISC",
@@ -12,5 +12,9 @@
     "lodash": "^3.10.1",
     "moment": "^2.10.6",
     "request": "^2.67.0"
+  },
+  "devDependencies": {
+    "chai": "*",
+    "mocha": "*"
   }
 }
