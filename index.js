@@ -6,15 +6,13 @@ function App(key, secret) {
     this.url = 'http://gw.api.taobao.com/router/rest';
     this.appKey = key;
     this.appSecret = secret;
-    var defaults = {
+    this.config = {
         method: '',
         format: 'json',
         v: '2.0',
-        sign_method: 'md5'
+        sign_method: 'md5',
+        app_key: key,
     };
-    this.config = _.merge(defaults, {
-        app_key: this.appKey
-    });
 }
 
 //签名
@@ -24,26 +22,19 @@ function App(key, secret) {
  * @returns {undefined}
  **/
 App.prototype.sign = function(params) {
-    var _this = this;
-    var params = _.merge(this.config, params);
+    var params = _.merge({}, this.config, params);
     params.timestamp = moment().format('YYYY-MM-DD HH:mm:ss')
     var str = [this.appSecret];
     Object.keys(params).sort().forEach(function(key) {
-        if (typeof _this.config[key] === 'object') {
-            str.push(key + JSON.stringify(_this.config[key]));
+        if (typeof params[key] === 'object') {
+            str.push(key + JSON.stringify(params[key]));
         } else {
-            str.push(key + _this.config[key]);
+            str.push(key + params[key]);
         }
-        
     });
     str.push(this.appSecret);
     str = str.join('');
-    var bufferSize = str.length > 1024 ? str.length : 1024;
-    var Buffer = require('buffer').Buffer;
-    var buf = new Buffer(bufferSize);
-    var len = buf.write(str, 0, bufferSize);
-    str = buf.toString('binary', 0, len);
-    params.sign = crypto.createHash('md5').update(str).digest('hex').toUpperCase();
+    params.sign = crypto.createHash('md5').update(str, 'utf-8').digest('hex').toUpperCase();
     return params;
 }
 
@@ -55,15 +46,16 @@ App.prototype.sign = function(params) {
  **/
 App.prototype.request = function(params, callback) {
     var params = this.sign(params);
-    request({
-        url: this.url,
-        headers: {
+    var postData = {
+	    url: this.url,
+	    form: params,
+	    json: true,
+	    headers: {
             'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
             'app_key': this.appKey,
         },
-        qs: params,
-        json: true
-    }, function(err, res, body) {
+    };
+    request.post(postData, function(err, res, body) {
         callback && callback.call(null, body);
     })
 }
