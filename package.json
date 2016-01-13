@@ -6,8 +6,12 @@
   "scripts": {
     "test": "mocha ./test"
   },
-  "author": "",
+  "author": "xiaoshan5733",
   "license": "ISC",
+  "keywords": [
+    "alidayu",
+    "阿里大鱼"
+  ],
   "dependencies": {
     "lodash": "^3.10.1",
     "moment": "^2.10.6",
