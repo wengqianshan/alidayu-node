@@ -12,7 +12,7 @@ describe('#短信发送', function() {
     it('当参数都正确应该返回成功数据', function(done) {
         app.smsSend({
             sms_free_sign_name: '注册验证',
-            sms_param: JSON.stringify({"code": "123456", "product": "测试网站"}),
+            sms_param: {"code": "123456", "product": "测试网站"},
             rec_num: testObj.phone,
             sms_template_code: 'SMS_640004'
         }, function(res) {
@@ -25,7 +25,7 @@ describe('#短信发送', function() {
     it('没有传手机号时应该返回错误error_response', function(done) {
         app.smsSend({
             sms_free_sign_name: '注册验证',
-            sms_param: JSON.stringify({"code": "123456", "product": "测试网站"}),
+            sms_param: {"code": "123456", "product": "测试网站"},
             //rec_num: testObj.phone,
             sms_template_code: 'SMS_640004'
         }, function(res) {
