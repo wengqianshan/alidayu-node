@@ -21,7 +21,7 @@ function App(key, secret) {
 /**
  * 签名
  * @param {object} params 参数
- * @returns {undefined}
+ * @returns {object} 返回合并后的参数对象，增加params.sign
  **/
 App.prototype.sign = function(params) {
     var _this = this;
@@ -29,12 +29,12 @@ App.prototype.sign = function(params) {
     params.timestamp = moment().format('YYYY-MM-DD HH:mm:ss')
     var str = [this.appSecret];
     Object.keys(params).sort().forEach(function(key) {
-        if (typeof _this.config[key] === 'object') {
-            str.push(key + JSON.stringify(_this.config[key]));
-        } else {
-            str.push(key + _this.config[key]);
+        var val = _this.config[key];
+        if (typeof val === 'object') {
+            val = JSON.stringify(val);
+            params[key] = val;
         }
-        
+        str.push(key + val);
     });
     str.push(this.appSecret);
     str = str.join('');

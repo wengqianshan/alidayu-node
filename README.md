@@ -76,8 +76,7 @@ app.smsSend({
   - `{string} called_show_num` 被叫号码侧的号码显示，传入的显示号码可以是阿里大鱼“管理中心-号码管理”中申请通过的号码。显示号码格式如下057188773344，4001112222，95500。显示号码也可以为主叫号码。
 - `callback` 回调，参考 http://open.taobao.com/doc2/apiDetail.htm?apiId=25443
 
-## 测试
+## 更新日志
 
-````
-npm test
-````
+### 1.0.2
+- 修复当参数类型为object时报签名错误的问题
