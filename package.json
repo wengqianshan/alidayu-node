@@ -1,6 +1,6 @@
 {
   "name": "alidayu-node",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "阿里大鱼nodejs版sdk",
   "main": "index.js",
   "scripts": {
