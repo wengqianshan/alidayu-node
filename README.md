@@ -1,5 +1,7 @@
 # 阿里大鱼nodejs版SDK
 
+[![npm version](https://img.shields.io/npm/v/alidayu-node.svg?style=flat-square)](https://www.npmjs.com/package/alidayu-node)
+
 ## 安装
 
 ````
